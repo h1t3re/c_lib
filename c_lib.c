@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-long unsigned int strlen(const char *str)
+unsigned int strlen(const char *str)
 {
         long unsigned int length = 0;
         while(*(str+(length*sizeof(char))) != '\0')
