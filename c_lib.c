@@ -19,7 +19,7 @@ const int strcmp(const char *str0, const char *str1)
         {
                 i = i +1;
         }
-        if((strlen(str0) != i) | (strlen(str1) != i))
+        if((i != strlen(str0)) | (i != strlen(str1)))
                 return 1;
         return 0;
 }
