@@ -5,27 +5,44 @@
 char **string_spliting(char *string, char *spliter)
 {
 	char **arrays = (char **)malloc(sizeof(char *));
-	char *temporary_array = (char *)malloc(strlen(spliter)*sizeof(char));
+	char *temporary_array = (char *)malloc((strlen(spliter)+1)*sizeof(char));
 	int position_in_arrays = 0;
 	int position_in_string = 0;
+	int position_of_string = 0;
 	int string_length = 0;
 	int j = 0;
-	while(*(string+position_in_string) != '\0')
+	int i = 0;
+	while(*(string+position_in_string+j) != '\0')
 	{
-		while(!strcmp(strdup(temporary_array),strdup(spliter)))
-		{
-			*(temporary_array + (j*sizeof(char))) = *(string + ((position_in_string+j)*sizeof(char)));
+		if(position_in_string == 0)
+			arrays[position_in_arrays] = (char *)malloc((position_in_string+1)*sizeof(char));
+		else
+			arrays[position_in_arrays] = (char *)realloc(arrays[position_in_arrays], (position_of_string+1)*sizeof(char));
 
-			*(*(arrays+(position_in_arrays*sizeof(char *)))+(position_in_string)*sizeof(char)) = *(string + (position_in_string*sizeof(char)));	
-			j++;
-			position_in_string++;
+		temporary_array[j] = string[position_in_string+j];
+
+		arrays[position_in_arrays][position_of_string] = string[position_in_string+j];	
+		j++;
+		//position_in_string++;
+		position_of_string++;	
+		temporary_array[j] = '\0';
+		arrays[position_in_arrays][position_of_string] = '\0';
+
+		if(!strcmp(strdup(temporary_array),strdup(spliter))) 
+		{
+			position_in_string = position_in_string+j;
+			j = 0;
+			position_of_string = 0;;
+			printf("temporary_array = %s\n", temporary_array);
+			printf("%s\n", arrays[position_in_arrays]);
 		}
-		j = 0;
-		printf("%s\n", *(arrays+(position_in_arrays*sizeof(char *))));
+		//while(& (string[position_in_string+j] != '\0'));	
 		position_in_arrays++;
+
 		arrays = (char **)realloc(arrays, (position_in_arrays+1)*sizeof(char *));
+		arrays[position_in_arrays] = '\0';
 	}
-	*(arrays +(position_in_arrays*(sizeof(char*)))) = '\0';
+	
 	return arrays;
 }
 
@@ -35,10 +52,11 @@ int main()
 	char *spliter = strdup("  \0");
 	int i = 0;
 	char **arrays = string_spliting(strdup(string), strdup(spliter));
-	while(*(arrays+(i*sizeof(char *))))
+	/*while(*(arrays+(i*sizeof(char *))) != '\0')
 	{
 		printf("%s\n", *(arrays+(i*sizeof(char *))));
 		i++;
-	}
+	}*/
 	return 0;
 }
+
