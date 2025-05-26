@@ -25,7 +25,7 @@ const int strcmp(const char *str0, const char *str1)
 }
 char *strdup(const char *str)
 {
-        char *dupofstr = (char *)malloc(strlen(str)*sizeof(char));
+        char *dupofstr = (char *)malloc(sizeof(char));
         if(dupofstr == NULL)
                 return NULL;
         int length = 0;
@@ -33,8 +33,9 @@ char *strdup(const char *str)
         {
                 dupofstr[length] = str[length];
                 length = length +1;
+                dupofstr = (char *)realloc(dupofstr, (length+1)*sizeof(char));
         }
-        dupofstr[length] = str[length];
+        dupofstr[length] = '\0';
         return dupofstr;
 }
 
