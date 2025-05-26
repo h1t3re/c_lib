@@ -9,22 +9,20 @@ unsigned int strlen(const char *str)
         {
                 length = length +1;
         }
-        length = length +1;
         return length;
 }
 
 const int strcmp(const char *str0, const char *str1)
 {
-        int i = 0;
-        while((str0[i] == str1[i]) & ((str0[i] != '\0') | (str1[i] != '\0')))
+        int x = 0;
+        while((str0[x] == str1[x]) & (str0[x] != '\0'))
         {
-                i = i +1;
+                x++;
+                if(x == (strlen(str1)))
+                        return 0;
         }
-        if((i != strlen(str0)) | (i != strlen(str1)))
-                return 1;
-        return 0;
+        return 1;
 }
-
 char *strdup(const char *str)
 {
         char *dupofstr = (char *)malloc(strlen(str)*sizeof(char));
