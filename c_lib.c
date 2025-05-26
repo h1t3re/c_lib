@@ -9,6 +9,7 @@ unsigned int strlen(const char *str)
         {
                 length = length +1;
         }
+        length = length +1;
         return length;
 }
 
@@ -26,7 +27,7 @@ const int strcmp(const char *str0, const char *str1)
 
 char *strdup(const char *str)
 {
-        char *dupofstr = (char *)malloc((strlen(str)+1)*sizeof(char));
+        char *dupofstr = (char *)malloc(strlen(str)*sizeof(char));
         if(dupofstr == NULL)
                 return NULL;
         int length = 0;
