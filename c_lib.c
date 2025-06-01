@@ -207,3 +207,73 @@ int *concatenate_arrays_of_int(int *restrict array0, int length0, int *restrict 
         }
         return array;
 }
+
+int find_string_position(char *buffer, char *string, int position)
+{
+        int i = 0;
+        int j = 0;
+        int position_found = 0;
+        char *str = (char *)malloc(strlen(string)*sizeof(char));
+        while(buffer[i+j] != '\0')
+        {
+                while(j < strlen(string))
+                {
+                        str[j] = buffer[i+j];
+                        j = j +1;
+                }
+                str[j] = '\0';
+                if(strcmp(string, str) == 0)
+                {
+                        position_found = position_found +1;
+                        if(position_found == position)
+                                return i-1;
+                        i = i +j;
+                }else{
+                        i = i +1;
+                }
+                j = 0;
+        }
+        return 0;
+}
+
+char **strsplit_v1(const char *string, const char *spliter)
+{
+        char **array = (char **)malloc(sizeof(char *));
+        char *buffer;
+        char *tmp;
+        int i = 0;
+        int j = 1;
+        int k = find_string_position(strdup(string), strdup(spliter), j);
+        int a = 0;
+        int c = 0;
+        int vk = 0;
+        while(string[i] != '\0')
+        {
+                buffer = (char *)malloc(sizeof(char));
+                while((i <= k) & (string[i] != '\0'))
+                {
+                        buffer[c] = string[i];
+                        c = c +1;
+                        i = i +1;
+                        buffer = (char *)realloc(buffer, (c+2)*sizeof(char));
+                }
+                if((k > i+strlen(strdup(spliter))) & (vk == 0))
+                {
+                        k = k-strlen(strdup(spliter));
+                        vk = 1;
+                }
+                i = i + strlen(strdup(spliter));
+                buffer[c] = '\0';
+                array[a] = strdup(buffer);
+                j = j +1;
+                k = find_string_position(strdup(string), strdup(spliter), j);
+                if(k == 0)
+                        k = strlen(strdup(string)); 
+                c = 0;
+                a = a +1;
+                array = (char **)realloc(array, (a+1)*sizeof(char *));
+                free(buffer);
+        }
+        array[a] = '\0';
+        return array;
+}
