@@ -13,3 +13,6 @@ void convert_integer_to_binary(int *restrict array, const int number, const int 
 double pow(double x, double y);
 int convert_binary_to_integer(int *array, int architecture);
 int *concatenate_arrays_of_int(int *restrict array0, int length0, int *restrict array1, int length1);
+int find_string_position(char *buffer, char *string, int position);
+char **strsplit_v1(const char *string, const char *spliter);
+
