@@ -15,7 +15,7 @@ unsigned int strlen(const char *str)
 const int strcmp(const char *str0, const char *str1)
 {
         int x = 0;
-        while((str0[x] == str1[x]) & (str0[x] != '\0'))
+        while((str0[x] == str1[x]) & ((str0[x] != '\0')|(str1[x] != '\0')))
         {
                 x++;
                 if(x == (strlen(str1)))
